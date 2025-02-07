@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int singleNumber(vector<int>& nums) {
+        int ones = 0, twos = 0;
+        
+        for (int num : nums) {
+            ones = (ones ^ num) & ~twos;  // XOR with num, remove bits seen in "twos"
+            twos = (twos ^ num) & ~ones;  // XOR with num, remove bits seen in "ones"
+        }
+        
+        return ones;  // The unique element appears only once in "ones"
+    }
+};
